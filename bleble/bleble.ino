@@ -66,6 +66,9 @@ void loop()
         case 7:
           robotMotion(64);
           break;
+        case 6: 
+          robotMotion(64);
+          break;
       }
       delay(3000);
       robotMotion(0);
