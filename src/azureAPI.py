@@ -27,4 +27,6 @@ def STT(voiceDataPath, OAuthTocken, outputFormat):
     return decodedResponse
 
 if __name__ == "__main__" :
-   
+    oauth=getOAuthTocken(open('apiKey.key','rb').read())
+    #print(STT('output.wav',oauth, 'detailed'))
+    print(STT('output.wav',oauth,'simple'))
