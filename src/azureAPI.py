@@ -26,6 +26,15 @@ def STT(voiceDataPath, OAuthTocken, outputFormat):
     decodedResponse=response.content.decode('utf-8')
     return decodedResponse
 
+def preProc(jsonData):
+    if jsonData['RecognitionStatus']=='InitialSilenceTimeout':
+        return ''
+    text = ''
+    for nowData in jsonData['NBest']:
+        if(nowData['Confidence']>0.5):
+            text+=nowData['MaskedITN']+' '
+    return text
+
 if __name__ == "__main__" :
     oauth=getOAuthTocken(open('apiKey.key','rb').read())
     #print(STT('output.wav',oauth, 'detailed'))
