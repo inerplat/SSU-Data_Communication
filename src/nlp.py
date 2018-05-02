@@ -18,5 +18,6 @@ def NounVerb(rawText):
             returnText+=Kpos[0] + ' '
     return returnText
 
+
 if __name__ == "__main__":
     print(NounVerb('뿌리 깊은 나무는 바람에 아니 흔들려서 꽃 좋고 열매 많으니'))
