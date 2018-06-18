@@ -16,6 +16,12 @@
 #define INIT 0x00000001
 #define QUIT 0x00000002
 #define LIST 0x00000003
+#define LINK 0x00000004
+#define CMDV 0x00000005
+#define CMDN 0x00000006
+#define FIN 0x00000007
+#define CMDT 0x00000008
+#define SEND 0x00000009
 
 #define INT 0
 #define CHAR 1
@@ -46,5 +52,5 @@ struct TCP_DATA {
 void protocol_data_print(struct TCP_DATA *Tcp_data);
 int tcp_write_header(int fd, const struct TCP_DATA *Tcp_data);
 int tcp_write(int fd, const struct TCP_DATA *Tcp_data);
-int tcp_read(int clnt_sock, struct TCP_DATA *Tcp_data);
+int tcp_read(int clnt_sock, struct TCP_DATA *Tcp_data, char *file_name);
 void tcp_free(struct TCP_DATA *tcp_data);
