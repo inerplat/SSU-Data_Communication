@@ -1,4 +1,4 @@
-
+import sys
 # coding: utf-8
 
 # In[11]:
@@ -138,10 +138,18 @@ class RCcar:
 
 # In[15]:
 
-
-R1 = Robotis()
-R1.connect('220.149.85.240',9002)
-while 1:
-    motionNo = R1.readData()
-    R1.motion(motionDict[motionNo])
+if __name__ == "__main__":
+    if len(sys.argv)!=2:
+        print(USAGE : [filename] [Robotname])
+    if argv[2] == 'Robotis':
+        R = Robotis()
+    elif argv[2] == 'RCcar':
+        R = RCcar()
+    else:
+        print("This program can't control that robot")
+        sys.exit()
+    R.connect('220.149.85.240',9002)
+    while 1:
+        motionNo = R.readData()
+        R.motion(motionDict[motionNo])
 

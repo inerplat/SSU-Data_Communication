@@ -149,8 +149,17 @@ class control:
                 if cmd == 'r' or cmd=='R':
                     self.s.send((5).to_bytes(4,'little'))
                 
-    def sendText(self, text):
-        s.send()
+    def sendText(self):
+        text = input()
+        for robot in self.rbList : 
+                self.s.send((protocol['SENDCTRL']|protocol['RECVSERV']|protocol['CMDN']).to_bytes(4,'little'))
+                self.s.send((1).to_bytes(4,'little'))
+                self.s.send((0).to_bytes(4,'little'))
+                self.s.send((2).to_bytes(4,'little'))
+                self.s.send((4).to_bytes(4,'little'))
+                self.s.send((robot).to_bytes(4,'little'))
+                self.s.send((len(text)).to_bytes(4,'little'))
+                self.s.send(text)
     def close(self):
         s.close()
     def chkConnect(self):
@@ -162,31 +171,31 @@ class control:
 # In[4]:
 
 
-client = control()
 
 
 # In[5]:
 
-
-print('#################Robot control client#################')
-while 1:
-    print('Enter the command do you want')
-    print('[1] Connect with server\n[2] Connect with robot\n[3] Record Voice\n[4] Send voice file to server\n[5] Send command\n[6] Send test\n[7] exit')
-    cmd = input()
-    if cmd=='1':
-        client.connect('220.149.85.240',9002)
-    elif cmd=='2' and client.chkConnect():
-        client.requestList()
-    elif cmd=='3' and client.chkConnect():
-        client.record('output.wav')
-    elif cmd=='4' and client.chkConnect():
-        client.sendVoice('output.wav')
-    elif cmd=='5' and client.chkConnect():
-        client.sendCmd()
-    elif cmd=='6' and client.chkConnect():
-        ctlText=input()
-        client.sendText(ctlText)
-    elif cmd=='7':
-        client.close()
-        break
+if __name__ == "__main__":
+    client = control()
+    print('#################Robot control client#################')
+    while 1:
+        print('Enter the command do you want')
+        print('[1] Connect with server\n[2] Connect with robot\n[3] Record Voice\n[4] Send voice file to server\n[5] Send command\n[6] Send test\n[7] exit')
+        cmd = input()
+        if cmd=='1':
+            client.connect('220.149.85.240',9002)
+        elif cmd=='2' and client.chkConnect():
+            client.requestList()
+        elif cmd=='3' and client.chkConnect():
+            client.record('output.wav')
+        elif cmd=='4' and client.chkConnect():
+            client.sendVoice('output.wav')
+        elif cmd=='5' and client.chkConnect():
+            client.sendCmd()
+        elif cmd=='6' and client.chkConnect():
+            ctlText=input()
+            client.sendText(ctlText)
+        elif cmd=='7':
+            client.close()
+            break
 
